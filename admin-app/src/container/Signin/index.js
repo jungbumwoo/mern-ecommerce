@@ -1,7 +1,7 @@
-import React from 'react'
-import Layout from '../../components/Layout'
+import React, { useState } from 'react';
+import Layout from '../../components/Layout';
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-import Input from '../../components/UI/Input'
+import Input from '../../components/UI/Input';
 import { login } from "../../actions";
 import { useDispatch } from 'react-redux';
 /**
@@ -10,13 +10,17 @@ import { useDispatch } from 'react-redux';
 **/
 
 const Signin = (props) => {
+
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ error, setError ] = useState('');
     const dispatch = useDispatch();
     console.log("Signin Button clicked")
     const userLogin = (e) => {
         e.preventDefault();
         const user = {
-            email: "jungbum@naver.com",
-            password: "341341"
+            email,
+            password
         }
         dispatch(login(user));
     };
@@ -30,19 +34,17 @@ const Signin = (props) => {
                             <Input 
                                 label="Email"
                                 placeholder="Email"
-                                value=""
+                                value={email}
                                 type="text"
-                                onChange={() => {
-                                }}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
 
                             <Input 
                                 label="Password"
                                 placeholder="Password"
-                                value=""
+                                value={password}
                                 type="password"
-                                onChange={() => {
-                                }}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                             <Button variant="primary" type="submit">
                                 Submit
