@@ -26,7 +26,7 @@ const Signin = (props) => {
             <Container>
                 <Row style={{ marginTop: "3.5rem"}}>
                     <Col md={{span: 6, offset: 3}}>
-                        <Form onSubmit={() => {userLogin}}>
+                        <Form onSubmit={userLogin}>
                             <Input 
                                 label="Email"
                                 placeholder="Email"
