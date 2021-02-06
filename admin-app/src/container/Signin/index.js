@@ -2,18 +2,28 @@ import React from 'react'
 import Layout from '../../components/Layout'
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import Input from '../../components/UI/Input'
+import { login } from "../../actions";
 /**
 * @author
 * @function Signin
 **/
 
 const Signin = (props) => {
+  const userLogin = (e) => {
+      e.preventDefault();
+      const user = {
+          email: "jungbum@naver.com",
+          password: "341341"
+      }
+      login(user);
+  };
+
   return(
     <Layout>
         <Container>
             <Row style={{ marginTop: "3.5rem"}}>
                 <Col md={{span: 6, offset: 3}}>
-                    <Form>
+                    <Form onSubmit={() => {userLogin()}}>
                         <Input 
                             label="Email"
                             placeholder="Email"
