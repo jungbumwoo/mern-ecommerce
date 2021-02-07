@@ -14,9 +14,6 @@ const cartRoutes = require('./routes/cart');
 
 //environment variable or you can say constants
 env.config();
-console.log(process.env.MONGO_DB_DATABASE);
-console.log(process.env.MONGO_DB_USER);
-console.log(process.env.MONGO_DB_PASSWORD);
 
 // mongodb connection
 mongoose.connect(
