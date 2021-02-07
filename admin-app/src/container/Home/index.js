@@ -10,7 +10,6 @@ import "./style.css";
 
 const Home = (props) => {
 
-
   return(
     <Layout>
       <Container fluid>
