@@ -8,6 +8,8 @@ import Layout from '../../components/Layout'
 **/
 
 const Home = (props) => {
+  
+
   return(
     <Layout>
         <Jumbotron style={{margin: '5rem'}} className="text-center">
