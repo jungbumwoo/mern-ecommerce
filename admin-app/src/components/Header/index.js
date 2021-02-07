@@ -1,7 +1,8 @@
 import React from 'react'
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { NavLink, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { signout } from '../../actions';
 /**
 * @author
 * @function  Header
@@ -10,15 +11,19 @@ import { useSelector } from 'react-redux';
 const  Header = (props) => {
 
   const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(signout());
+  };
 
   const renderLoggedInLinks = () => {
+
     return (
       <Nav>
         <li className="nav-item">
-            <span className="nav-link">Signout</span>
+            <span className="nav-link" onClick={logout}>Signout</span>
         </li>  
       </Nav>
-
     );
   }
 
