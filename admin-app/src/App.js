@@ -5,6 +5,8 @@ import { isUserLoggedIn } from './actions';
 import './App.css'
 import PrivateRoute from './components/HOC/privateRoute';
 import Home from './container/Home';
+import Orders from './container/Orders';
+import Products from './container/Products';
 import Signin from './container/Signin';
 import Signup from './container/Signup';
 
@@ -26,6 +28,10 @@ function App() {
     <div className="App">
         <Switch>
           <PrivateRoute exact path="/" component={Home}/>
+          <PrivateRoute path="/products" component={Products}/>
+          <PrivateRoute path="/orders" component={Orders}/>
+
+          
           <Route path="/signin" component={Signin}/>
           <Route path="/signup" component={Signup}/>
         </Switch>
