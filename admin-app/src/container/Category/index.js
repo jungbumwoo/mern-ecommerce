@@ -113,7 +113,7 @@ const Category = (props) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                <Button variant="primary" onClick={handleCategoryImage}>
+                <Button variant="primary" onClick={handleClose}>
                     Save Changes
                 </Button>
                 </Modal.Footer>

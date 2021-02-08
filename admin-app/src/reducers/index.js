@@ -8,7 +8,7 @@ import { combineReducers } from 'redux';
 const rootReducer = combineReducers({
     auth: authReducer,
     user: userReducer,
-    cartegory: categoryReducer,
+    category: categoryReducer,
     product: productReducer,
     order: orderReducer
 });
