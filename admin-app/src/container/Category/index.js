@@ -9,7 +9,7 @@ import Layout from '../../components/Layout';
 **/
 
 const Category = (props) => {
-    const category = useSelector((state) => state.category);
+    const category = useSelector(state => state.category);
     const dispatch = useDispatch();
     console.log("categoty!! at Category Component")
     console.log(category);
