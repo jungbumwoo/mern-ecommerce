@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Header';
 import { Container, Row, Col } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import './style.css'
 
 /**
 * @author
@@ -24,7 +25,7 @@ const Layout = (props) => {
                     <li><NavLink to={'/orders'}>Orders</NavLink></li>
                   </ul>
                 </Col>
-                <Col md={10} style={{ marginLeft: `auto`}}>{props.children}</Col>
+                <Col md={10} style={{ marginLeft: `auto`, paddingTop: '3.6rem'}}>{props.children}</Col>
               </Row>
             </Container>
             :
