@@ -7,6 +7,7 @@ import { categoryConstants } from "../../actions/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../actions/product.action";
 import './style.css';
+import { generatePublicUrl } from "../../urlConfig";
 
 /**
  * @author
@@ -198,12 +199,15 @@ const Products = (props) => {
           </Col> 
         </Row>
         <Row>
-          <Col style={{display:'flex'}}>
-            {productDetails.productPictures.map(picture => 
-              <div>
-                <img src={`http://localhost:2000/public/${picture.img}`} />
-              </div>
+          <Col>
+            <label className="key">Product Pictures</label>
+            <div style={{display:'flex'}}>
+              {productDetails.productPictures.map(picture => 
+                <div className="productImgContainer">
+                  <img src={generatePublicUrl(picture.img)} />
+                </div>
               )}
+            </div>
           </Col> 
         </Row>
       </Modal>
