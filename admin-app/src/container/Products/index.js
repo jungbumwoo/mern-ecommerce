@@ -6,6 +6,7 @@ import Modal from "../../components/UI/Modal";
 import { categoryConstants } from "../../actions/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../../actions/product.action";
+import './style.css';
 
 /**
  * @author
@@ -21,6 +22,7 @@ const Products = (props) => {
   const [productPictures, setProductPicture] = useState([]);
   const [show, setShow] = useState(false);
   const [productDetailModal, setProductDetailModal] = useState(false);
+  const [productDetails, setProductDetails] = useState(null);
   const category = useSelector((state) => state.category);
   const product = useSelector(state => state.product);
   const dispatch = useDispatch();
@@ -57,10 +59,10 @@ const Products = (props) => {
   const handleProductPictures = (e) => {
     setProductPicture([...productPictures, e.target.files[0]]);
   }; 
-
+ 
   const renderProducts = () => {
     return (
-      <Table responsive="sm">
+      <Table style={{ fontSize: 12}} responsive="sm">
         <thead>
           <tr>
             <th>#</th>
@@ -154,11 +156,14 @@ const Products = (props) => {
   }
 
   const showProductDetailsModal = (product) => {
+    setProductDetails(product);
     setProductDetailModal(true);
-    console.log(product);
   }
 
   const renderProductDetailsModal = () => {
+    if(!productDetails){
+      return null;
+    }
     return(
       <Modal
         show={productDetailModal}
@@ -166,7 +171,12 @@ const Products = (props) => {
         modalTitle={'Product Details'}
         size="lg"
       >
-        <p>Product Details Modal</p>
+        <Row>
+          <Col md="6">
+            <label className="key">Name</label>
+            <p className="value">{productDetails.name}</p>
+          </Col>
+        </Row>
       </Modal>
     )
   }
