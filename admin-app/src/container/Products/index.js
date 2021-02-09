@@ -70,7 +70,6 @@ const Products = (props) => {
             <th>Name</th>
             <th>Price</th>
             <th>Quantity</th>
-            <th>Product Pictures</th>
             <th>Category</th>
           </tr>
         </thead>
@@ -83,7 +82,7 @@ const Products = (props) => {
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.quantity}</td>
-                  <td>---</td>
+                  <td>{product.category.name}</td>
                 </tr>
               ) : null
           }
@@ -189,7 +188,7 @@ const Products = (props) => {
           </Col>
           <Col md="6">
             <label className="key">Category</label>
-            <p className="value">---</p>
+            <p className="value">{productDetails.category.name}</p>
           </Col>
         </Row>
         <Row>
