@@ -25,7 +25,7 @@ const buildNewCategories = (parentId, categories, category) => {
         if(cat._id == parentId){
             myCategories.push({
                 ...cat,
-                children: cat.children ? buildNewCategories(parentId, [...cat.children, {
+                children: cat.children  ? buildNewCategories(parentId, [...cat.children, {
                     _id: category._id,
                     name: category.name,
                     slug: category.slug,
