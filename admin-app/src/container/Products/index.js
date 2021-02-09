@@ -176,6 +176,35 @@ const Products = (props) => {
             <label className="key">Name</label>
             <p className="value">{productDetails.name}</p>
           </Col>
+          <Col md="6">
+            <label className="key">Price</label>
+            <p className="value">{productDetails.price}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <label className="key">Quantity</label>
+            <p className="value">{productDetails.quantity}</p>
+          </Col>
+          <Col md="6">
+            <label className="key">Category</label>
+            <p className="value">---</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col md="12">
+            <label className="key">Description</label>
+            <p className="value">{productDetails.description}</p>
+          </Col> 
+        </Row>
+        <Row>
+          <Col style={{display:'flex'}}>
+            {productDetails.productPictures.map(picture => 
+              <div>
+                <img src={`http://localhost:2000/public/${picture.img}`} />
+              </div>
+              )}
+          </Col> 
         </Row>
       </Modal>
     )
