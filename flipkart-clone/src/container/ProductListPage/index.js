@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getProductsBySlug } from '../../actions';
 import Layout from '../../components/Layout';
 import './style.css';
@@ -19,6 +19,9 @@ const ProductListPage = (props) => {
     }, [])
     return(
         <Layout>
+            {
+                product.
+            }
             <div className="card">
                 <div className="cardHeader">
                     <div>Samsung mobile under 10k</div>
@@ -29,13 +32,13 @@ const ProductListPage = (props) => {
                         <div className="productImgContainer">
                             <img src="http://localhost:2000/public/WZpPQoK5I-52e27980185045.Y3JvcCwxOTk5LDE1NjQsMCwzOQ.png" alt=""/>
                         </div>
-                        <div>
-                            <div>Samsumg 4gb phone</div>
+                        <div className="productInfo">
+                            <div style={{ margin: '0.3rem 0'}}>Samsumg 4gb phone</div>
                             <div>
-                                <span>4.3</span>
+                                <span>4.3</span>&nbsp;
                                 <span>3353</span>
                             </div>
-                            <div>5000</div>
+                            <div className="productPrice">5000</div>
                         </div>
                     </div>
                 </div>
