@@ -5,6 +5,9 @@ import { addCategory, getAllCategory } from '../../actions';
 import Layout from '../../components/Layout';
 import Input from '../../components/UI/Input';
 import Modal from "../../components/UI/Modal";
+import CheckboxTree from "react-checkbox-tree";
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+
 /**
 * @author
 * @function Category
@@ -16,6 +19,8 @@ const Category = (props) => {
     const [ parentCategoryId, setParentCategoryId ] = useState('');
     const [ categoryImage, setCategoryImage ] = useState('');
     const [ show, setShow ] = useState(false);
+    const [checked, setChecked] = useState([]);
+    const [ expanded, setExpanded] = useState([]);
     const dispatch = useDispatch();
     
     const handleClose = () => {
@@ -40,13 +45,13 @@ const Category = (props) => {
         let mycategories = [];
         for(let category of categories){
             mycategories.push(
-                <li key={category.name}>
-                    {category.name}
-                    {category.children.length > 0 ? (<ul>{renderCategories(category.children)}</ul>) : null} 
-                </li>
+                {
+                    label: category.name,
+                    value: category._id,
+                    children: category.children.length > 0 && renderCategories(category.children)
+                }
             );
         }
-
         return mycategories;
     }
 
@@ -77,9 +82,16 @@ const Category = (props) => {
                 </Row>
                 <Row>
                     <Col md={12}>
-                        <ul>
+                        {/* <ul>
                             { renderCategories(category.categories) }
-                        </ul>
+                        </ul> */}
+                        <CheckboxTree
+                            nodes={renderCategories(category.categories)}
+                            checked={checked}
+                            expanded={expanded}
+                            onCheck={checked => setChecked(checked)}
+                            onExpand={expanded => setExpanded(expanded)}
+                        />
                     </Col>
                 </Row>
             </Container>
