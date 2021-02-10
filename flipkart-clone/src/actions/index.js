@@ -1,1 +1,2 @@
-export * from "./category.actions";
+export * from "./category.action";
+export * from "./product.action";
