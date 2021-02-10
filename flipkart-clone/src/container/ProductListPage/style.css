@@ -14,6 +14,7 @@
 
 .productContainer {
     width: 12rem;
+    margin: 0 0.6rem;
 
 }
 
@@ -22,7 +23,7 @@
     height: 9rem;
     overflow: hidden;
     text-align: center;
-    margin: 0 auto;
+    margin: 0.3rem auto;
 }
 
 .productContainer .productImgContainer img {
