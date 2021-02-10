@@ -90,6 +90,16 @@ const Category = (props) => {
         setExpandedArray(expandedArray);
     }
 
+    const handleCategoryInput = (key, value, index, type) => {
+        if(type == "checked"){
+            const updatedCheckedArray = checkedArray.map((item, _index) => index == _index ? { ...item, [key]: value } : item);
+            setCheckedArray(updatedCheckedArray);
+        } else if(type == "expanded") {
+            const updatedExpandedArray = expandedArray.map((item, _index) => index == _index ? { ...item, [key]: value } : item);
+            setExpandedArray(updatedExpandedArray);
+        }
+    }
+
     return(
         <Layout sidebar>
             <Container>
@@ -171,14 +181,50 @@ const Category = (props) => {
                             <Input
                                 value={item.name}
                                 placeholder={`Category Name`}
-                                onChange={(e) => setCategoryName(e.target.value)}
+                                onChange={(e) => handleCategoryInput('name', e.target.value, index, 'expanded')}
                             />
                         </Col>
                         <Col>
                             <select 
                                 className="form-control" 
                                 value={item.parentId}
-                                onChange={(e)=> setParentCategoryId(e.target.value)}>
+                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'expanded')}>
+                                    <options>select category</options>
+                                    {
+                                        createCategoryList(category.categories).map(option =>
+                                            <option key={option.value} value={option.value}>{option.name}</option>)
+                                    }
+                            </select>           
+                        </Col>
+                        <Col>
+                            <select
+                                className="form-control"
+                            >
+                                <option value="">Select Type</option>
+                                <option value="store">Store</option>
+                                <option value="product">Product</option>
+                                <option value="page">Page</option>
+                            </select>
+                        </Col>
+                    </Row>)
+                }
+                <h6>Checked Categories</h6>
+                {
+                    checkedArray.length > 0 && 
+                    checkedArray.map((item, index) => 
+                    <Row key={index}>
+                        <Col>
+                            <Input
+                                value={item.name}
+                                placeholder={`Category Name`}
+                                onChange={(e) => handleCategoryInput('name', e.target.value, index, 'checked')}
+                            />
+                        </Col>
+                        <Col>
+                            <select 
+                                className="form-control" 
+                                value={item.parentId}
+                                onChange={(e) => handleCategoryInput('parentId', e.target.value, index, 'checked')}>
                                     <options>select category</options>
                                     {
                                         createCategoryList(category.categories).map(option =>
