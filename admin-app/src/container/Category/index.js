@@ -11,6 +11,7 @@ import Modal from "../../components/UI/Modal";
 import CheckboxTree from "react-checkbox-tree";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
 import {IoIosCheckboxOutline, IoIosCheckbox, IoIosArrowForward, IoIosArrowDown} from "react-icons/io"
+import UpdateCategoriesModal from './components/UpdatecategoriesModal';
 
 /**
 * @author
@@ -272,7 +273,7 @@ const Category = (props) => {
             })
         }
     }
-
+ 
     const renderDeleteCategoryModal = () => {
         return (
             <Modal
@@ -341,7 +342,17 @@ const Category = (props) => {
                     </Col>
                 </Row>
             </Container>
-            {renderUpdateCategoriesModal()}
+            <UpdateCategoriesModal 
+                show={updateCategoryModal}
+                handleClose={updateCategoriesForm}
+                modalTitle={'Update Categories'}
+                size="lg" 
+                expandedArray={expandedArray}
+                checkedArray={checkedArray}
+                handleCategoryInput={handleCategoryInput}
+                categoryList={createCategoryList(category.categories)}
+            />
+            {/* {renderUpdateCategoriesModal()} */}
             {renderAddCategoryModal()}
             {renderDeleteCategoryModal()}
         </Layout>

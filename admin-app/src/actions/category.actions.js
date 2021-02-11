@@ -39,7 +39,8 @@ export const addCategory = (form) => {
                 });
             }
         } catch(error) {
-            console.log(error)
+            const {} = error.response
+            console.log(error.response)
         }
         
     }
