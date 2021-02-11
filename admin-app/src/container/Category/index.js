@@ -6,13 +6,13 @@ import { addCategory,
     updateCategories, 
     deleteCategories as deleteCategoriesAction  } from '../../actions';
 import Layout from '../../components/Layout';
-import Input from '../../components/UI/Input';
 import Modal from "../../components/UI/Modal";
 import CheckboxTree from "react-checkbox-tree";
 import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import {IoIosCheckboxOutline, IoIosCheckbox, IoIosArrowForward, IoIosArrowDown} from "react-icons/io"
+import {IoIosCheckboxOutline, IoIosCheckbox, IoIosArrowForward, IoIosArrowDown, IoIosAdd, IoIosTrash, IoIosCloudUpload} from "react-icons/io"
 import UpdateCategoriesModal from './components/UpdatecategoriesModal';
 import AddCategoryModal from './components/AddCategoryModal';
+import "./style.css";
 
 /**
 * @author
@@ -35,6 +35,11 @@ const Category = (props) => {
     
     const handleClose = () => {
         const form = new FormData();
+
+        // if (categoryName ==="") {
+        //     alert('Name is required');
+        //     return;
+        // }
         form.append('name', categoryName);
         form.append('parentId', parentCategoryId);
         form.append('categoryImage', categoryImage);
@@ -42,11 +47,6 @@ const Category = (props) => {
         setCategoryName('');
         setParentCategoryId('');
 
-        // const cat = {
-        //     categoryName,
-        //     parentCategoryId,
-        //     categoryImage
-        // };
         setShow(false);
     }
     const handleShow = () => setShow(true);
@@ -82,7 +82,6 @@ const Category = (props) => {
     const updateCategory = () => {
         updateCheckedAndExpandedCategories();
         setUpdateCategoryModal(true);
-        
     }
 
     const updateCheckedAndExpandedCategories = () => {
@@ -136,33 +135,6 @@ const Category = (props) => {
         setUpdateCategoryModal(false);
     }
     
-    const renderAddCategoryModal = () => {
-        return (
-            <Modal
-                show={show}
-                handleClose={handleClose}
-                modalTitle={'Add New Category'}    
-            >
-                <Input
-                    value={categoryName}
-                    placeholder={`Category Name`}
-                    onChange={(e) => setCategoryName(e.target.value)}
-                />
-                <select 
-                    className="form-control" 
-                    value={parentCategoryId}
-                    onChange={(e)=> setParentCategoryId(e.target.value)}>
-                        <options>select category</options>
-                        {
-                            createCategoryList(category.categories).map(option =>
-                                <option key={option.value} value={option.value}>{option.name}</option>)
-                        }
-                </select>
-                <input type="file" name="categoryImage" onChange={handleCategoryImage} />
-            </Modal>
-        )
-    }
-
     const deleteCategory = () => {
         updateCheckedAndExpandedCategories();
         setDeleteCategoryModal(true);
@@ -223,15 +195,19 @@ const Category = (props) => {
                     <Col md={12}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <h1>Category</h1>
-                            <button onClick={handleShow}>Add</button>
+                            <div className="actionBtnContainer">
+                                <span>Actions: </span>
+                                <button onClick={handleShow}><IoIosAdd /><span>Add</span></button>
+                                <button onClick={deleteCategory}><IoIosTrash /><span>Delete</span></button>
+                                <button onClick={updateCategory}><IoIosCloudUpload /><span>Edit</span></button>
+                            </div>
+                            
                         </div>
                     </Col>
                 </Row>
                 <Row>
                     <Col md={12}>
-                        {/* <ul>
-                            { renderCategories(category.categories) }
-                        </ul> */}
+
                         <CheckboxTree
                             nodes={renderCategories(category.categories)}
                             checked={checked}
@@ -248,12 +224,7 @@ const Category = (props) => {
                         />
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <button onClick={deleteCategory}>Delete</button>
-                        <button onClick={updateCategory}>Edit</button>
-                    </Col>
-                </Row>
+              
             </Container>
             <AddCategoryModal 
                 show={show}
@@ -264,6 +235,7 @@ const Category = (props) => {
                 parentCategoryId={parentCategoryId}
                 setParentCategoryId={setParentCategoryId}
                 categoryList={categoryList}
+                handleCategoryImage={handleCategoryImage}
             />
             <UpdateCategoriesModal 
                 
@@ -272,7 +244,6 @@ const Category = (props) => {
                 handleCategoryInput={handleCategoryInput}
                 categoryList={categoryList}
             />
-            {/* {renderAddCategoryModal()} */}
             {renderDeleteCategoryModal()}
         </Layout>
     )

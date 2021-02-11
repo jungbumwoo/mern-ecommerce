@@ -22,22 +22,35 @@ const AddCategoryModal = (props) => {
             handleClose={handleClose}
             modalTitle={modalTitle}    
         >
-            <Input
-                value={categoryName}
-                placeholder={`Category Name`}
-                onChange={(e) => setCategoryName(e.target.value)}
-            />
-            <select 
-                className="form-control" 
-                value={parentCategoryId}
-                onChange={(e)=> setParentCategoryId(e.target.value)}>
-                    <options>select category</options>
-                    {
-                        categoryList.map(option =>
-                            <option key={option.value} value={option.value}>{option.name}</option>)
-                    }
-            </select>
-            <input type="file" name="categoryImage" onChange={handleCategoryImage} />
+            <Row>
+                <Col>
+                    <Input
+                        value={categoryName}
+                        placeholder={`Category Name`}
+                        onChange={(e) => setCategoryName(e.target.value)}
+                        className="form-control-sm"
+                    />
+                </Col>
+                <Col>
+                    <select 
+                        className="form-control form-control-sm" 
+                        value={parentCategoryId}
+                        onChange={(e)=> setParentCategoryId(e.target.value)}>
+                        <options>select category</options>
+                        {
+                            categoryList.map(option =>
+                                <option key={option.value} value={option.value}>{option.name}</option>)
+                        }
+                    </select>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <input type="file" name="categoryImage" onChange={handleCategoryImage} />
+                </Col>
+            </Row>
+            
+            
         </Modal>
     )
 }
