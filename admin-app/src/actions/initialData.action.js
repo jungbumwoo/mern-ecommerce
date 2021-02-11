@@ -16,7 +16,5 @@ export const getInitialData = () => {
                  payload: { products }
             })
         }
-        console.log("At initialData");
-        console.log(res)
     }
 }
