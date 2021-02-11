@@ -85,3 +85,7 @@ exports.updateCategories = async(req, res) => {
     }
     res.status(200).json({body: req.body});
 }
+
+exports.deleteCategories = (req, res) => {
+    res.status(200).json({body:req.body})
+}

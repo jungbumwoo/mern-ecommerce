@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCategory, getAllCategory, updateCategories } from '../../actions';
+import { addCategory, 
+    getAllCategory, 
+    updateCategories, 
+    deleteCategories as deleteCategoriesAction  } from '../../actions';
 import Layout from '../../components/Layout';
 import Input from '../../components/UI/Input';
 import Modal from "../../components/UI/Modal";
@@ -253,6 +256,14 @@ const Category = (props) => {
         setDeleteCategoryModal(true);
     }
 
+    const deleteCategories = () => {
+        console.log("deleteCategories")
+        const cheackedIdsArray = checkedArray.map((item, index) => ({_id: item.value}));
+        const expandedIdsArray = expandedArray.map((item, index) => ({_id: item.value}));
+        const idsArray = expandedIdsArray.concat(checkedArray);
+        dispatch(deleteCategoriesAction(idsArray));
+    }
+
     const renderDeleteCategoryModal = () => {
         return (
             <Modal
@@ -270,16 +281,14 @@ const Category = (props) => {
                     {
                         label: 'Yes',
                         color: 'danger',
-                        onClick: () => {
-                            alert('yes');
-                        }
+                        onClick: deleteCategories
                     }
                 ]}
             >
                 <h5>Expanded</h5>
-                {
-                    
-                }
+                {expandedArray.map((item,  index) => <span key={index}>{item.name}</span>)}
+                <h5>Checked</h5>
+                {checkedArray.map((item,  index) => <span key={index}>{item.name}</span>)}
             </Modal>
         )
     }

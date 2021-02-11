@@ -51,3 +51,14 @@ export const updateCategories = (form) => {
         }
     }
 }
+
+export const deleteCategories = (ids) => {
+    return async dispatch => {
+        const res = await axiosInstance.post('/category/delete', {
+            payload: {
+                ids
+            }
+        });
+        console.log(res)
+    }
+}
