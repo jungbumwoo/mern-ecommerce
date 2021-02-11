@@ -258,16 +258,19 @@ const Category = (props) => {
 
     const deleteCategories = () => {
         console.log("deleteCategories")
-        const cheackedIdsArray = checkedArray.map((item, index) => ({_id: item.value}));
+        const checkedIdsArray = checkedArray.map((item, index) => ({_id: item.value}));
         const expandedIdsArray = expandedArray.map((item, index) => ({_id: item.value}));
         const idsArray = expandedIdsArray.concat(checkedArray);
-        dispatch(deleteCategoriesAction(idsArray))
-        .then(result => {
-            if(result){
-                dispatch(getAllCategory())
-                setDeleteCategoryModal(false)
-            }
-        })
+
+        if(checkedIdsArray.length > 0) {
+            dispatch(deleteCategoriesAction(checkedIdsArray))
+            .then(result => {
+                if(result){
+                    dispatch(getAllCategory())
+                    setDeleteCategoryModal(false)
+                }
+            })
+        }
     }
 
     const renderDeleteCategoryModal = () => {
