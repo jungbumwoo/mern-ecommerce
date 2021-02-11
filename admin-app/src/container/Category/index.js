@@ -24,7 +24,8 @@ const Category = (props) => {
     const [ expanded, setExpanded] = useState([]);
     const [ checkedArray, setCheckedArray ] = useState([]);
     const [ expandedArray, setExpandedArray ] = useState([]);
-    const [updateCategoryModal, setUpdateCategoryModal ] = useState(false);
+    const [ updateCategoryModal, setUpdateCategoryModal ] = useState(false);
+    const [ deleteCategoryModal, setDeleteCategoryModal ] = useState(false);
     const dispatch = useDispatch();
     
     const handleClose = () => {
@@ -71,10 +72,15 @@ const Category = (props) => {
 
     const handleCategoryImage = (e) => {
         setCategoryImage(e.target.files[0]);
-    }
+    } 
 
     const updateCategory = () => {
+        updateCheckedAndExpandedCategories();
         setUpdateCategoryModal(true);
+        
+    }
+
+    const updateCheckedAndExpandedCategories = () => {
         const categories = createCategoryList(category.categories);
         const checkedArray = [];
         const expandedArray = [];
@@ -213,6 +219,8 @@ const Category = (props) => {
             </Modal>
         ); 
     }
+
+
     const renderAddCategoryModal = () => {
         return (
             <Modal
@@ -236,6 +244,42 @@ const Category = (props) => {
                         }
                 </select>
                 <input type="file" name="categoryImage" onChange={handleCategoryImage} />
+            </Modal>
+        )
+    }
+
+    const deleteCategory = () => {
+        updateCheckedAndExpandedCategories();
+        setDeleteCategoryModal(true);
+    }
+
+    const renderDeleteCategoryModal = () => {
+        return (
+            <Modal
+                modalTitle="Confirm"
+                show={deleteCategoryModal}
+                handleClose={()=> setDeleteCategoryModal(false)}
+                buttons = {[
+                    {
+                        label:'No',
+                        color: 'primary',
+                        onClick: () => {
+                            alert('no');
+                        }
+                    },
+                    {
+                        label: 'Yes',
+                        color: 'danger',
+                        onClick: () => {
+                            alert('yes');
+                        }
+                    }
+                ]}
+            >
+                <h5>Expanded</h5>
+                {
+                    
+                }
             </Modal>
         )
     }
@@ -274,13 +318,14 @@ const Category = (props) => {
                 </Row>
                 <Row>
                     <Col>
-                        <button>Delete</button>
+                        <button onClick={deleteCategory}>Delete</button>
                         <button onClick={updateCategory}>Edit</button>
                     </Col>
                 </Row>
             </Container>
             {renderUpdateCategoriesModal()}
             {renderAddCategoryModal()}
+            {renderDeleteCategoryModal()}
         </Layout>
     )
 }
