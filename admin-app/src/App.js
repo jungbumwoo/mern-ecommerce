@@ -7,6 +7,7 @@ import './App.css'
 import PrivateRoute from './components/HOC/privateRoute';
 import Category from './container/Category';
 import Home from './container/Home';
+import NewPage from './container/NewPage';
 import Orders from './container/Orders';
 import Products from './container/Products';
 import Signin from './container/Signin';
@@ -30,6 +31,7 @@ function App() {
     <div className="App">
         <Switch>
           <PrivateRoute exact path="/" component={Home}/>
+          <PrivateRoute path="/page" component={NewPage}/>
           <PrivateRoute path="/category" component={Category}/>
           <PrivateRoute path="/products" component={Products}/>
           <PrivateRoute path="/orders" component={Orders}/>
